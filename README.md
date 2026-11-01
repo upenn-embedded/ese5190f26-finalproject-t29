@@ -28,7 +28,7 @@ Future advanced versions may add a Radxa Zero 3W single-board computer, based on
 
 This project was inspired by a recently released Hugging Face video of a yellow duck robot. We find the combination of a playful character form with bipedal robotics especially engaging. The reference project has made selected resources openly available, which helps us understand its implementation direction. However, fully reproducing the complete system remains challenging because it combines mechanical design, coordinated multi-servo control, sensing, and software deployment.
 
-We therefore begin with a verifiable and achievable baseline: a yellow duck robot that can stand stably and walk. A photoresistor, BNO085, and safety state machine make its stop-and-resume behavior reliable. If sufficient time remains after the baseline is complete, we will incrementally add advanced capabilities such as ToF obstacle avoidance, audio interaction, and camera-based perception.
+We therefore begin with a verifiable and achievable baseline: a yellow duck robot that can stand stably and walk. A photoresistor, BNO085, and safety state machine make its stop-and-resume behavior reliable. If sufficient time remains after the baseline is complete, we will incrementally add advanced capabilities such as audio interaction.
 
 #### Core Features
 
@@ -44,7 +44,9 @@ We therefore begin with a verifiable and achievable baseline: a yellow duck robo
 ```mermaid
 flowchart LR
   PWR[Battery / power board] --> HAT[HAT / servo controller]
-  MCU[ATmega328PB\nstate machine + safety logic] -->|PWM or servo bus| HAT
+  CAM[IMX219 camera] -->|MIPI CSI-2| RADXA[Radxa module\nimage processing + target localization]
+  RADXA -->|UART: LEFT / CENTER / RIGHT| MCU[ATmega328PB\nbare-metal C gait + steering + safety logic]
+  MCU -->|PWM or servo bus| HAT
   HAT --> S1[10 leg servos\n5 per leg]
   LDR[Back photoresistor\nvoltage divider] -->|ADC| MCU
   IMU[BNO085 IMU] -->|SPI preferred / I2C| MCU
@@ -63,8 +65,18 @@ flowchart LR
   <tbody>
     <tr>
       <td>ATmega328PB</td>
-      <td>State machine, gait scheduling, light detection, attitude safety, LED control, and fault handling</td>
-      <td>GPIO, ADC, timers, SPI/I2C, servo interface</td>
+      <td>Runs bare-metal C for the state machine, gait scheduling, and servo steering toward the target based on the left/center/right result; also handles light detection, attitude safety, LED control, and faults</td>
+      <td>GPIO, ADC, timers, SPI/I2C, UART, servo interface</td>
+    </tr>
+    <tr>
+      <td>Radxa module</td>
+      <td>Processes camera frames, detects a red target or another specified target, and outputs its left, center, or right position</td>
+      <td>MIPI CSI-2 camera input; UART to ATmega328PB</td>
+    </tr>
+    <tr>
+      <td>IMX219 camera</td>
+      <td>Captures forward-facing images for red-target or specified-target detection</td>
+      <td>MIPI CSI-2 to Radxa module</td>
     </tr>
     <tr>
       <td>Ten leg servos, five per leg</td>
@@ -757,11 +769,9 @@ The minimum viable project is complete when the robot can:
 After the ten-servo baseline has achieved all required objectives, the team may build an advanced fifteen-servo version if sufficient time remains.
 
 - Fifteen-servo body: Extend the mechanical design from ten to fifteen servos for additional joints and more expressive motion.
-- ToF sensor: Detect obstacles ahead and automatically avoid them or stop safely.
 - Microphone: Trigger actions from clapping, sound intensity, or a keyword.
-- Camera: Recognize people, color markers, or simple gestures.
 
-> Implementation note: Hugging Face hosts openly available models and algorithms for these perception tasks. Therefore, the advanced version can focus on adapting an appropriate existing model to the physical robot, including camera/microphone input, embedded deployment, and validation, rather than training a model from scratch.
+> Implementation note: Hugging Face hosts openly available models and algorithms for audio interaction. Therefore, the advanced version can focus on adapting an appropriate existing model to the physical robot, including microphone input, embedded deployment, and validation, rather than training a model from scratch.
 
 **This is the end of the Project Proposal section. The remaining sections will be filled out based on the milestone schedule.**
 
