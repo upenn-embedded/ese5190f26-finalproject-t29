@@ -10,9 +10,9 @@
 | [Lingran Zhang]  | [lingranz@engineering.upenn.edu] |
 | [Yixuan Ji]      | [ji6@engineering.upenn.edu]      |
 
-**GitHub Repository URL:[github.com/upenn-embedded/ese5190f26-finalproject-t29](https://github.com/upenn-embedded/ese5190f26-finalproject-t29)**
+**GitHub Repository URL:** [Yellow Duck Robot Repository](https://github.com/upenn-embedded/ese5190f26-finalproject-t29)
 
-**GitHub Pages Website URL:** [for final submission]*
+**GitHub Pages Website URL:** To be published for the final submission.
 
 ## Final Project Proposal
 
@@ -20,7 +20,7 @@
 
 This project develops a minimum viable yellow duck robot that can walk continuously using ten leg servos, stop safely when a hand covers a photoresistor on its back, and resume walking when the photoresistor is uncovered. Each leg has five actuated degrees of freedom: hip roll, hip pitch, knee pitch, ankle pitch, and ankle roll. A BNO085 inertial measurement unit (IMU) monitors the robot's attitude and prevents unsafe motion after excessive tilting or a communication failure.
 
-The project is implemented in bare-metal, register-level C on an ATmega328PB. The HAT and servo controller are limited to power distribution, interface expansion, level shifting, and low-level communication. All application-level decisions are made by the ATmega328PB.
+The project is planned to use bare-metal, register-level C on an ATmega328PB. The HAT and servo controller will be limited to power distribution, interface expansion, level shifting, and low-level communication. All application-level decisions will be made by the ATmega328PB.
 
 Future advanced versions may add a Radxa Zero 3W single-board computer, based on the RK3566 processor, as an upper-level edge-computing platform for vision, audio, networking, and higher-level decision making.
 
@@ -187,7 +187,7 @@ The first tuning objective is reliable center-of-mass transfer. Stride length sh
 
 #### Photoresistor Stop Control
 
-The photoresistor is mounted on the robot's back in a clearly defined location that can be covered consistently by one hand.
+The photoresistor is planned to be mounted on the robot's back in a location that can be consistently covered by one hand. It has not yet been installed on the physical robot.
 
 #### Circuit Design
 
@@ -542,7 +542,7 @@ Timer frequencies and interrupt response should be verified with a logic analyze
     </tr>
     <tr>
       <td>SRS-07</td>
-      <td>Servo targets shall be interpolated so that no instantaneous position jump is commanded.</td>
+      <td>The MuJoCo simulation shall support keyboard-controlled forward, backward, and turning movements of the virtual robot.</td>
     </tr>
     <tr>
       <td>SRS-08</td>
@@ -565,7 +565,7 @@ Timer frequencies and interrupt response should be verified with a logic analyze
   <tbody>
     <tr>
       <td>HRS-01</td>
-      <td>Ten leg servos, five per leg, shall provide hip, knee, and ankle motion for weight transfer, swing, and foot leveling.</td>
+      <td>The mechanical design shall define mounting positions for all ten leg servos, with five actuated joints per leg covering hip, knee, and ankle motion.</td>
     </tr>
     <tr>
       <td>HRS-02</td>
@@ -703,34 +703,11 @@ Timer frequencies and interrupt response should be verified with a logic analyze
 
 #### Team Responsibilities
 
-<div align="center">
-<table style="display: inline-table; width: auto; max-width: 100%; text-align: left;">
-  <thead>
-    <tr>
-      <th>Team Member</th>
-      <th>Primary Responsibilities</th>
-      <th>Deliverables</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Member 1: Mechanics and gait</td>
-      <td>Ten-servo leg structure, feet, gait keyframes, joint limits, and walking tuning</td>
-      <td>Stable standing structure, gait parameters, and walking video</td>
-    </tr>
-    <tr>
-      <td>Member 2: Sensors and drivers</td>
-      <td>BNO085 driver, ADC acquisition, light filtering, LEDs, and low-level communication</td>
-      <td>Register-level drivers and sensor test data</td>
-    </tr>
-    <tr>
-      <td>Member 3: Integration and validation</td>
-      <td>State machine, timers, interrupts, power integrity, fault handling, and quantitative testing</td>
-      <td>Integrated firmware, test report, and demonstration flow</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+| Team Member | Primary Responsibilities | Planned Deliverables |
+|---|---|---|
+| Zichao Di | MuJoCo simulation, gait design, coordinated leg motion, and motion-control development | Simulation results, gait parameters, and motion-control demonstrations |
+| Lingran Zhang | Mechanical assembly, servo mounting, and physical single-servo testing | Mechanical assembly evidence and servo test documentation |
+| Yixuan Ji | Sensor interfaces, bare-metal firmware, and safety integration | Sensor interface code, test records, and integration progress |
 
 #### Expected Development Order
 
@@ -747,7 +724,7 @@ Timer frequencies and interrupt response should be verified with a logic analyze
 
 | Milestone  | Functionality Achieved                                                                                 | Distribution of Work                     |
 | ---------- | ------------------------------------------------------------------------------------------------------ | ---------------------------------------- |
-| Sprint #1  | Confirm the BOM, power architecture, ten-servo mechanical layout, and one-servo register-level control | Approved BOM and single-servo test video |
+| Sprint #1  | Review BOM and power architecture; define ten-servo mechanical layout; begin physical assembly and simulation; attempt initial servo control | BOM and power design status, mechanical photos, and simulation videos; physical single-servo test deferred |
 | Sprint #2  | Assemble both legs; complete BNO085 and photoresistor drivers                                          | Standing-pose video and sensor logs      |
 | MVP Demo   | Implement keyframe gait and reach 10 consecutive steps                                                 | Walking video and step-count log         |
 | Final Demo | Integrate safe stop/resume, fall protection, and final quantitative validation                         | Final demo video and test table          |
@@ -775,13 +752,74 @@ After the ten-servo baseline has achieved all required objectives, the team may 
 
 **This is the end of the Project Proposal section. The remaining sections will be filled out based on the milestone schedule.**
 
-## Sprint Review #1
+## Sprint Review #1 — November 13, 2026
 
 ### Last week's progress
 
+**Mechanical design and assembly.** We determined the mounting positions and mechanical structures for all ten servos, with five planned actuated joints per leg. We also began physical assembly of the lower body by installing servos into foot housings and joint brackets and connecting portions of the left and right leg structures. This is a **partial mechanical prototype**, not a completed or powered walking robot. The physical servos have not yet been powered or motion-tested.
+
+**MuJoCo simulation.** We used a virtual duck-robot model in MuJoCo to demonstrate keyboard-controlled **forward, backward, and turning** movements. Two videos document these three motion commands. These results establish virtual motion control only; they do not demonstrate physical walking, gait stability, or embedded servo-control firmware.
+
+**Planning and work completed.** The project BOM has been reviewed, and the power architecture has been determined. Some required components have arrived, but others are still outstanding. The planned single-servo physical control demonstration was **not completed** during Sprint #1; it remains a next-sprint task.
+
+**Proof of work.** The following seven photographs document partial mechanical assembly. The two videos document the confirmed keyboard-controlled MuJoCo motion demonstrations.
+
+#### Mechanical assembly photographs
+
+| Photo | Evidence |
+|---|---|
+| ![Initial ankle servo assembly](images/sprint1/01_initial_ankle_servo_assembly.jpg) | **Photo 1:** Servos installed in foot bases. |
+| ![Left and right leg assembly](images/sprint1/02_left_right_leg_assembly.jpg) | **Photo 2:** Partially assembled left and right legs with joint labels. |
+| ![Connected leg frame](images/sprint1/03_connected_leg_frame.jpg) | **Photo 3:** Preliminary connection between leg structures. |
+| ![Joint bracket detail](images/sprint1/04_joint_bracket_detail.jpg) | **Photo 4:** Servo and joint-bracket assembly detail. |
+| ![Foot servo mounting](images/sprint1/05_foot_servo_mounting.jpg) | **Photo 5:** Servo placement in a foot-related component. |
+| ![Internal foot servo wiring](images/sprint1/06_internal_foot_servo_wiring.jpg) | **Photo 6:** Servos and cables positioned inside a foot housing. |
+| ![Foot housing fit check](images/sprint1/07_foot_housing_fit_check.jpg) | **Photo 7:** Foot housing positioned around the servo assembly. |
+
+#### Keyboard-controlled simulation videos
+
+- [Simulation video 1 — keyboard control demonstration](videos/sprint1/01_keyboard_control_simulation.mp4)
+- [Simulation video 2 — keyboard motion demonstration](videos/sprint1/02_keyboard_motion_simulation.mp4)
+
+### HRS Verification — Sprint #1
+
+**HRS-01 — Ten-servo mechanical layout**
+
+**Requirement:** The mechanical design shall define mounting positions for all ten leg servos, with five actuated joints per leg covering hip, knee, and ankle motion.
+
+**Verification method:** Review the ten-servo leg layout and the assigned joints for each leg. Compare the planned mounting positions with the mechanical design and document the partially assembled structures using the photographs above.
+
+**Result: Verified at the mechanical-design level.** All ten servo mounting positions and corresponding mechanical structures have been determined. The ten-servo leg layout is documented in the Project Proposal, and the photographs show the partial physical implementation. **This verification does not establish that all ten servos are installed, powered, or able to move.**
+
+### SRS Verification — Sprint #1
+
+**SRS-07 — Keyboard-controlled MuJoCo simulation**
+
+**Requirement:** The MuJoCo simulation shall support keyboard-controlled forward, backward, and turning movements of the virtual robot.
+
+**Verification method:** Use keyboard inputs in MuJoCo to command forward, backward, and turning movements, and document the observed virtual robot motion in video recordings.
+
+**Result: Verified at the simulation level.** Forward, backward, and turning movements were demonstrated in MuJoCo. The two linked simulation videos document these movements. **This verification does not establish stable physical walking or operation of the ATmega328PB servo-control firmware.**
+
 ### Current state of project
 
+The project is in the **mechanical prototyping and simulation** stage. The ten-servo mechanical layout has been defined, and parts of the leg and foot structures have been assembled. The BOM has been reviewed, and the power architecture has been determined. **Only some of the required components have arrived; others are still outstanding.** The photoresistor has not yet been installed on the physical robot.
+
+MuJoCo keyboard control has demonstrated forward, backward, and turning movements. Physical servos have not yet been powered or motion-tested, and a physical single-servo control demonstration has not been completed. Physical walking, sensor integration, and safe stop/resume have not yet been demonstrated.
+
+**Challenges and next steps:** Complete the mechanical assembly, establish controlled movement of a physical servo, and begin sensor interface testing. The motion-control work must eventually be transferred from the simulation to physical hardware and validated there.
+
 ### Next week's plan
+
+For Sprint 2, work is divided into three areas with assigned owners and measurable completion criteria.
+
+| Task | Estimated Time | Assigned Team Member | Definition of Done |
+|---|---|---|---|
+| **1. Simulation & Motion Control:** Refine MuJoCo forward, backward, and turning control; investigate coordinated joint motion and initial gait parameters for eventual physical implementation. | 8–12 hours | Zichao Di | Document the updated simulation behavior and identify initial gait parameters or motion sequences for subsequent hardware implementation. |
+| **2. Mechanical Assembly & Servo Testing:** Continue assembly of legs, feet, and joints; power and command one physical servo; inspect its range of motion. | 6–8 hours | Lingran Zhang | Document the planned assembly progress and demonstrate controlled motion of at least one physical servo, with photos or video. |
+| **3. Sensors, Firmware & Safety Integration:** Begin ATmega328PB interfaces for the photoresistor and BNO085 and establish basic firmware structure for future safety logic. | 6–8 hours | Yixuan Ji | Implement and test at least one sensor interface and document its readings or communication results. |
+
+**Sprint 2 verification target:** Document verification of at least one hardware requirement and one software requirement using evidence appropriate to their stated acceptance criteria.
 
 ## Sprint Review #2
 
