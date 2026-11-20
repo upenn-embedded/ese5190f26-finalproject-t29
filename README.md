@@ -821,13 +821,104 @@ For Sprint 2, work is divided into three areas with assigned owners and measurab
 
 **Sprint 2 verification target:** Document verification of at least one hardware requirement and one software requirement using evidence appropriate to their stated acceptance criteria.
 
-## Sprint Review #2
+
+## Sprint Review #2 — November 20, 2026
 
 ### Last week's progress
 
+**Mechanical assembly.** During Sprint 2, we completed the remaining mechanical assembly work that was unfinished in Sprint 1. The robot's main body, left and right legs, feet, and joint structures have now been assembled into a complete physical prototype. All ten servos have been installed in their planned mechanical positions, with five servos assigned to each leg. This represents significant progress from the partially assembled lower-body structure documented in Sprint 1.
+
+
+**Standing Demonstration.** During Sprint 2, we achieved an initial standing configuration of the physical duck robot. The assembled robot can stand upright on both feet, demonstrating that the completed mechanical structure can support a standing posture. However, the robot is not yet fully stable and still requires further adjustments to improve its balance and standing reliability. Improving standing stability will be a priority in the next sprint.
+
+
+**MuJoCo simulation.** We completed the planned simulation work for Sprint 2.
+
+[Simulation details and demonstration results will be added after reviewing the Sprint 2 videos.]
+
+**Project management and coordination.** We met with our project manager to review the current project status and discuss our progress. The meeting provided an opportunity to evaluate the completed mechanical assembly and simulation work and identify priorities for the next sprint.
+
+**Proof of work.** Photographic evidence documents the completed mechanical assembly and initial standing configuration. Additional simulation videos will be included to document the software progress.
+
+#### Mechanical assembly and standing photographs
+
+| Photo | Evidence |
+|---|---|
+| ![Completed duck robot assembly](images/sprint1/02_completed_robot_assembly.JPG) | **Photo 1:** Completed physical assembly of the duck robot, showing the main body, both legs, feet, and installed servos in an upright standing configuration. |
+
+#### MuJoCo simulation videos
+
+[To be added after reviewing the Sprint 2 simulation videos.]
+
+### HRS Verification — Sprint #2
+
+**HRS-01 — Ten-servo mechanical layout**
+
+**Requirement:** The mechanical design shall define mounting positions for all ten leg servos, with five actuated joints per leg covering hip, knee, and ankle motion.
+
+**Verification method:** Inspect the completed mechanical assembly and compare the physical servo mounting positions with the ten-servo leg layout documented in the Project Proposal. Verify that the left and right leg structures contain the planned servo mounting locations and that the servos are installed within the assembled mechanical framework. Document the completed assembly using photographs.
+
+**Result: Verified at the mechanical-assembly level.** All ten servos have been installed in the planned mechanical structure, with five servos assigned to each leg. The previously incomplete leg and foot assemblies have been connected to the robot's main body, forming a complete physical prototype. The Sprint 2 photograph provides visual evidence of the assembled robot. This extends the Sprint 1 verification from mechanical design and partial assembly to completed physical assembly.
+
+
+**HRS-06 — Standing stability**
+
+**Requirement:** The stopped robot shall remain in double support for 30 seconds without falling.
+
+**Verification method:** Place the fully assembled robot on a level surface with both feet supporting the body. Observe whether the robot can maintain an upright standing configuration. For full HRS-06 verification, conduct a timed 30-second standing test and document whether the robot remains upright throughout the test.
+
+**Result: Partially achieved; further verification required.**During Sprint 2, the physical duck robot was able to stand upright on both feet after completing the mechanical assembly. This demonstrates initial progress toward the standing stability requirement.However, the robot's standing posture is not yet sufficiently stable, and further adjustments are needed to improve its balance. A successful 30-second standing test has not yet been documented.
+
+
+### SRS Verification — Sprint #2
+
+**SRS-07 — Keyboard-Controlled MuJoCo Simulation**
+
+**Requirement:** The MuJoCo simulation shall support keyboard-controlled forward, backward, and turning movements of the virtual robot.
+
+**Verification Method:** Run the MuJoCo simulation and evaluate the robot's movement behavior using the recorded simulation videos. Review the simulated leg movements, initial walking gait, and balance performance. Compare the Sprint 2 results with the keyboard-controlled movement demonstrations completed during Sprint 1.
+
+**Result: Previously verified in Sprint 1; further simulation development completed in Sprint 2.**
+
+During Sprint 2, we continued improving the MuJoCo simulation and exploring coordinated leg movements and basic walking gait development.
+
+The first simulation video demonstrates alternating leg movements and an initial walking sequence, showing progress toward coordinated motion control.
+
+The second video shows the robot losing balance and falling during simulation. This identifies a stability issue that requires further gait adjustment and improvement.
+
+The third video demonstrates a simulation environment containing the robot and a ball, with visible ball movement. This provides additional evidence of simulation development, although the specific interaction and control mechanism have not yet been verified.
+
+Overall, Sprint 2 achieved further progress in simulated motion development. However, improving walking stability and refining the coordinated leg movements remain important tasks for the next sprint.
+
+**Simulation Evidence:**
+
+- [Video 1: Walking Gait Simulation](videos/sprint2/01_walking_gait_simulation.mp4) — Demonstrates alternating leg movements and initial walking gait development.
+- [Video 2: Balance and Fall Simulation](videos/sprint2/02_balance_and_fall_simulation.mp4) — Shows a balance failure during simulation, highlighting the need for improved stability.
+- [Video 3: Robot and Ball Simulation](videos/sprint2/03_robot_and_ball_simulation.mp4) — Shows the robot and a moving ball within the MuJoCo simulation environment.
+
+
 ### Current state of project
 
+The project has progressed from partial mechanical assembly to a fully assembled physical prototype. The main body, legs, feet, and ten-servo mechanical structure have been assembled, and an initial upright standing configuration has been demonstrated.
+
+The Sprint 2 simulation work has also been completed. Detailed simulation results and corresponding software requirement verification will be documented using the demonstration videos.
+
+The primary remaining challenge is to connect the completed mechanical structure with the control system and validate its behavior through physical testing. Although the robot has reached an upright standing configuration, controlled physical walking, timed standing stability, and the final sensor-based stop/resume functionality still require verification.
+
 ### Next week's plan
+
+For Sprint 3, the proposed focus is to transition from completed mechanical assembly and simulation toward physical motion control, sensor integration, and systematic testing.
+
+| Task | Estimated Time | Assigned Team Member | Definition of Done |
+|---|---|---|---|
+| **1. Simulation & Gait Development:** Refine the simulated walking gait, adjust joint motion sequences, and prepare initial motion parameters for physical implementation. | 8–12 hours | Zichao Di | Document an updated gait sequence and identify joint parameters that can be used as a starting point for physical servo control. |
+| **2. Physical Servo Control & Standing Tests:** Begin controlled testing of the installed servos, inspect joint movement and mechanical limits, and evaluate the robot's standing stability. | 6–8 hours | Lingran Zhang | Demonstrate controlled physical servo movement, document test results, and perform a timed standing test toward HRS-06 verification. |
+| **3. Sensor & Firmware Integration:** Continue developing the ATmega328PB interfaces for the photoresistor and BNO085 IMU and begin integrating sensor readings with the robot's safety-control logic. | 6–8 hours | Yixuan Ji | Demonstrate at least one working sensor interface and document the corresponding readings or communication results. |
+
+**Sprint 3 Goal:** Begin connecting the completed physical robot with the control system, validate basic servo movement and standing stability, and continue developing the sensor interfaces required for safe stop/resume functionality.
+
+**Requirement Verification Plan:** Prioritize the remaining standing-stability verification for HRS-06 and continue software requirement verification using documented simulation and firmware tests.
+
 
 ## MVP Demo
 
